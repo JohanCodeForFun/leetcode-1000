@@ -1,16 +1,18 @@
-export function canPlaceFlowers(flowerbed: number[], n: number): boolean {
-  
-  for (let i = 0; i < flowerbed.length; i++) {
-    // console.log(flowerbed[i])
-    if (flowerbed[i] === 1 &&
-      flowerbed[i + n + 2] !== 1 &&
-      flowerbed[i - 1] !== 1
-      ) {
-      return true
-    } else {
-      return false
-    }
-  }
-  return false
-};
+// Thank you T-Damer for this great solution.
+// link to profile, https://leetcode.com/T-Damer/
 
+export function canPlaceFlowers(flowerbed: number[], n: number): boolean {
+  let noAdjacent = 0;
+
+  flowerbed.forEach((_value, index) => {
+    const prev = index - 1;
+    const next = index + 1;
+
+    if (!flowerbed[prev] && !flowerbed[index] && !flowerbed[next]) {
+      noAdjacent++;
+      flowerbed[index] = 1;
+    }
+  });
+
+  return noAdjacent >= n;
+}
