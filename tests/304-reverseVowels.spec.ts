@@ -1,3 +1,4 @@
+import { reverseVowels } from "../src/reverseVowels";
 
 describe('test reverse vowels', () => { 
   
@@ -5,14 +6,14 @@ describe('test reverse vowels', () => {
     const test = reverseVowels("hello");
     const result = "holle";
 
-    expect(test).toStrictEqual(result);
+    expect(test).toBe(result);
   });
 
   it("second test", () => {
     const test = reverseVowels("leetcode");
     const result = "leotcede";
 
-    expect(test).toStrictEqual(result);
+    expect(test).toBe(result);
   });
 
  })
