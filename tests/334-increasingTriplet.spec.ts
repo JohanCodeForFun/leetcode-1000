@@ -10,7 +10,7 @@ describe('test increasing triplet', () => {
 
     expect(test).toEqual(result);
   });
-  
+
   it("second test", () => {
     const nums = [5,4,3,2,1]
     const test =  increasingTriplet(nums);
@@ -33,7 +33,7 @@ describe('test increasing triplet', () => {
     const nums = [20,100,10,12,5,13]
     const test =  increasingTriplet(nums);
 
-    const result = false
+    const result = true
 
     expect(test).toEqual(result);
   });
