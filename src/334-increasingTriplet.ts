@@ -5,17 +5,18 @@
 */
 
 export const increasingTriplet = (nums: number[]): boolean => {
-  console.log(nums)
-  for (let index = 0; index < nums.length; index++) {
-    const i = nums[nums.length - 1];
-    const j = nums[nums.length - 2];
-    const k = nums[nums.length - 3];
-
-    if (i > j) {
-      if (j > k) {
-        return true;
-      }
+  let firstNum = Number.MAX_VALUE;
+  let secondNum = Number.MAX_VALUE;
+  
+  for (let num of nums) {
+    if (num <= firstNum) {
+      firstNum = num;
+    } else if (num <= secondNum) {
+      secondNum = num;
+    } else {
+      return true;
     }
   }
+  
   return false;
 };
