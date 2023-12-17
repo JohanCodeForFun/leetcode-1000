@@ -1,23 +1,12 @@
-export const productExceptSelf = (input: number[]): number[] => {
-  // it("first test", () => {
-  //   const nums = [1, 2, 3, 4];
-  //   const result = [24, 12, 8, 6];
-
-  // it("second test", () => {
-  //   const nums = [-1, 1, 0, -3, 3];
-  //   const result = [0, 0, 9, 0, 0];
-
-  let result = [];
-  let initialNumber;
-
-  for (let i = 0; i < input.length; i++) {
-    // _1_ 2 * 3 * 4 = 24
-    // 1 * _2_ 3 * 4 = 12
-    // 1 * 2  _3_ * 4 = 8
-    // 1  2 * 3 _4_ = 6
-    
-    result.push(input[i] * input[i])
+export const productExceptSelf = (nums: number[]): number[] => {
+  const result = new Array(nums.length).fill(1);
+  let prefix = 1;
+  let postfix = 1;
+  for (let i = 0; i < nums.length; ++i) {
+    result[i] *= prefix;
+    result[nums.length - 1 - i] *= postfix;
+    prefix *= nums[i];
+    postfix *= nums[nums.length - 1 - i];
   }
-
   return result;
 };
