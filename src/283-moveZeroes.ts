@@ -1,41 +1,25 @@
-// Input: nums = [0]
-// Output: [0]
-
-/**
- Do not return anything, modify nums in-place instead.
- */
-
 /*
-  x Consider having two pointers at the start of the array. 
-  - Iterate through the array and swap between the pointers 
-  - only when right pointer is non-zero, only after the swap, 
-  - increment your left pointer (along with the right pointer). 
-  - Otherwise, only increment your right pointer.
- */
+ Do not return anything, modify nums in-place instead.
 
-// Input: nums = [0,1,0,3,12]
-// Output: [1,3,12,0,0]
+ Constraints:
+  1 <= nums.length <= 104
+  -231 <= nums[i] <= 231 - 1
+ 
+  Follow up: Could you minimize the total number of operations done?
+
+  Thank you David Coxon (chordmemory) for this great solution!
+  link, https://leetcode.com/chordmemory/
+*/
 
 export function moveZeroes(nums: number[]): void {
-  let counter = 0;
-  let temp;
+  let writePointer = 0;
+  for (let readPointer = 0; readPointer < nums.length; readPointer++) {
+    const val = nums[readPointer];
+    nums[readPointer] = 0;
 
-  let pointer1 = 0;
-  let pointer2 = nums.length - 1;
-
-  while (counter < nums.length) {
-    if (nums[pointer2] !== 0) {
-      temp = nums[pointer1]
-      nums[pointer1] = nums[pointer2];
-      nums[pointer2] = temp;
-
-      pointer1++;
-      pointer2--;
+    if (val !== 0) {
+      nums[writePointer] = val;
+      writePointer++;
     }
-    pointer2--;
-
-    console.log("nums:", nums[pointer1], nums[pointer2]);
-    counter++;
   }
-  console.log(nums);
 }
