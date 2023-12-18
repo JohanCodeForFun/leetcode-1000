@@ -8,7 +8,10 @@
   Follow up: Could you minimize the total number of operations done?
 
   Thank you David Coxon (chordmemory) for this great solution!
-  link, https://leetcode.com/chordmemory/
+  link to profile, https://leetcode.com/chordmemory/
+  
+  Alex Gavrilov (alexgavrilov) for another great solution! 
+  link to profile, https://leetcode.com/alexgavrilov/
 */
 
 export function moveZeroes(nums: number[]): void {
@@ -22,4 +25,14 @@ export function moveZeroes(nums: number[]): void {
       writePointer++;
     }
   }
+
+  // another solution
+  // for (let i = 0, j = 0; i < nums.length; i++) {
+  //   if (nums[i] != 0) {
+  //     const x: number = nums[j];
+  //     nums[j] = nums[i];
+  //     nums[i] = x;
+  //     j++;
+  //   }
+  // }
 }
