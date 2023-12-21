@@ -1,10 +1,6 @@
 export function maxOperations(nums: number[], k: number): number {
-  // nums = [4,4,1,3,1,3,2,2,5,5,1,5,2,1,2,3,5,4]
-  // k = 2;
-
-  // result = 2;
-
   const n = nums.length;
+  const _nums = nums.sort((n1, n2) => n1 - n2)
 
   let left = 0;
   let right = n - 1;
@@ -12,11 +8,15 @@ export function maxOperations(nums: number[], k: number): number {
   let count = 0;
 
   while (left < right) {
-    if (nums[left] + nums[right] === k) {
-      count++;
+    if (_nums[left] + _nums[right] < k) {
       left++;
-    } else {
+    } else if (_nums[left] + _nums[right] > k) {
       right--;
+    } else {
+      left++;
+      right--;
+
+      count++;
     }
   }
 
