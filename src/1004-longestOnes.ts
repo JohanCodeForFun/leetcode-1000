@@ -1,34 +1,21 @@
 export function longestOnes(nums: number[], k: number): number {
-  let windowSum = 0;
-  let maxSum = 0;
-  let count = 0;
+  let left = 0;
+  let right = 0;
 
-  console.log(nums)
-
-  // nums = [1,1,1,0,0,0,1,1,1,1,0], k = 2
-  // result = 6;
-
-  for (let i = 0; i < k; i++) {
-    windowSum += nums[i];
-  }
-
-  maxSum = windowSum;
-
-  console.log(maxSum)
-
-  for (let i = k; i < nums.length; i++) {
-    windowSum += nums[i] - nums[i - k];
-    if(nums[i] === 0 && k > 0) {
+  while (right < nums.length) {
+    if (nums[right] === 0) {
       k--;
-      continue;
-    } else {
-      nums[i] = 1
-      count++;
     }
+
+    if (k < 0) {
+      if (nums[left] === 0) {
+        k++;
+      }
+      left++;
+    }
+
+    right++;
   }
-  console.log(nums)
 
-
-
-  return count
-  };
+  return right - left;
+}
