@@ -1,0 +1,7 @@
+// Thanks nikmerlock for this solution.
+// link, https://leetcode.com/nikmerlock/
+
+export function containsDuplicate(nums: number[]): boolean {
+  const set = new Set<number>(nums);
+  return (set.size < nums.length);
+};
