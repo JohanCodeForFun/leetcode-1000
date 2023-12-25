@@ -1,15 +1,18 @@
 import { ListNode } from "./class/NodeList";
 
-// Thank you subscriber6436 for this solution
-// link, https://leetcode.com/subscriber6436/
+// Thank you madiweaver for this solution
+// link, https://leetcode.com/madiweaver/
 
 export function reverseList(head: ListNode | null): ListNode | null {
-  let prev = null;
+  if (!head) return head;
 
-  while (head) {
-    prev = new ListNode(head.val, prev);
-    head = head.next;
+  function reverse(curr: ListNode, parent: ListNode | null): ListNode {
+    const next = curr.next;
+
+    curr = new ListNode(curr.val, parent);
+
+    if (!next) return curr;
+    return reverse(next, curr);
   }
-
-  return prev;
+  return reverse(head, null)
 }
