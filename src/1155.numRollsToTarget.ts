@@ -1,29 +1,23 @@
 /*
   Complexity Analysis
-    Time complexity: 
-    Space complexity: 
+    Time complexity: O(d * f * target)
+    Space complexity: O(d * target)
 
-  We iterate over ...
-
-  We only need ...
+    Help from github copilot.
 */
 
-export function numRollsToTarget(n: number, k: number, target: number): number {
-  if (n === 1) return 1;
+export function numRollsToTarget(n: number, f: number, target: number): number {
+  const MOD = 10**9 + 7;
+  const dp = Array(n + 1).fill(0).map(() => Array(target + 1).fill(0));
+  dp[0][0] = 1;  // number of ways to roll 0 dice to get sum 0 is 1
 
-  let result = 0;
-  const dice = [1, 2, 3, 4, 5, 6];
-
-  for (let i = 0; i < dice.length; i++) {
-    for (let j = 0; j < dice.length; j++) {
-      if (dice[i] + dice[j] === target) {
-        result++;
+  for (let i = 1; i <= n; i++) {
+    for (let j = 1; j <= target; j++) {
+      for (let k = 1; k <= f; k++) {
+        if (j >= k) dp[i][j] = (dp[i][j] + dp[i - 1][j - k]) % MOD;
       }
     }
   }
 
-  if (30 <= k || 30 <= n) return result % (10 ** 9 + 7);
-  if (1000 <= target) return result % (10 ** 9 + 7);
-
-  return result;
+  return dp[n][target];
 }
