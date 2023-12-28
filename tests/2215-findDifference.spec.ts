@@ -35,12 +35,4 @@ describe("2215: Find the Difference", () => {
     expect(test).toEqual(result);
   });
 
-  it("second test", () => {
-    const s = "1111"
-    const result = 3;
-
-    const test = maxScore(s);
-
-    expect(test).toEqual(result);
-  });
 });
