@@ -1,3 +1,8 @@
+/*
+  Time Complexity: O(n log n)
+  Space Complexity: O(n)
+*/
+
 export function sortEvenOdd(nums: number[]): number[] {
   const oddNumbers: number[] = [];
   const evenNumbers: number[] = [];
