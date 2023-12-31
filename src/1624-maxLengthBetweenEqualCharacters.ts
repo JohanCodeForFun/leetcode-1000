@@ -1,19 +1,17 @@
+/*
+  Time Complexity: O(n)
+  Space Complexity: O(n)
+*/
+
 export function maxLengthBetweenEqualCharacters(s: string): number {
   const map: { [key: string]: number } = {};
   let ans = -1;
 
-  let left = 1;
-  let right = s.length;
-
-  while (left < right) {
-    if (s[left - 1] !== s[right - 1]) {
-      left++;
-    }
-    if (s[left - 1] === s[right - 1]) {
-      ans = Math.max(ans, right - left - 1);
-      left++;
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] in map) {
+      ans = Math.max(ans, i - map[s[i]] - 1);
     } else {
-      right--;
+      map[s[i]] = i;
     }
   }
 
