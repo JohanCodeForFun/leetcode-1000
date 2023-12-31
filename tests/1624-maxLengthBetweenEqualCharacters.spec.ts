@@ -41,5 +41,13 @@ describe("1624: Max length...", () => {
 
     expect(test).toEqual(result);
   });
+  it("edge case", () => {
+    const s = "aydsicwrfybunpqsdsnenvrfirr"
+    const result = 19;
+
+    const test = maxLengthBetweenEqualCharacters(s);
+
+    expect(test).toEqual(result);
+  });
 
 });
