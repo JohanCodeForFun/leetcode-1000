@@ -1,6 +1,8 @@
 /*
   Time Complexity: O(n)
   Space Complexity: O(n)
+
+  Tags: stack, hash, map
 */
 
 export function isValid(s: string): boolean {
