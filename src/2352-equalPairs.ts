@@ -1,37 +1,42 @@
-function isRowEqualToColumn(grid: number[][], rowIndex: number, colIndex: number): boolean {
-  for (let i = 0; i < grid.length; i++) {
-    if (grid[rowIndex][i] === grid[i][colIndex]) {
-      return true
-    }
-  }
-  return false
-}
+/*
+  Time Complexity: O(n * m)
+  Space Complexity: O(n * m)
+
+  Thank you Staz for this solution!
+  Link, https://leetcode.com/stazcp/
+
+  Thank you github copilot for suggestions!
+*/
 
 export function equalPairs(grid: number[][]): number {
-  const horizontal: { [key: string]: number[] } = {};
-  const vertical: { [key: string]: number[] } = {};
-
-  let count = 0;
-  let temp;
+  const rows = new Map();
+  const cols = new Map();
 
   for (let i = 0; i < grid.length; i++) {
-    horizontal[i] = grid[i]
-    for (let j = 0; j < grid[i].length; j++) {
-      if (!vertical[`col${j}`]) {
-        vertical[`col${j}`] = [];
-      }
-      vertical[`col${j}`].push(grid[i][j]);
+    const row = [],
+      col = [];
+
+    for (let j = 0; j < grid[0].length; ++j) {
+      console.log("for [i][j]:", grid[i][j])
+      console.log("for [j][i]:", grid[j][i])
+      row.push(grid[i][j]);
+      col.push(grid[j][i].toString());
+    }
+
+    const strRow = row.toString();
+    const strCol = col.toString();
+
+    rows.set(strRow, (rows.get(strRow) ?? 0) + 1);
+    cols.set(strCol, (cols.get(strCol) ?? 0) + 1);
+  }
+
+  let ans = 0;
+
+  for (const [row, value] of rows) {
+    if (cols.has(row)) {
+      ans += cols.get(row) * value;
     }
   }
 
-  for (let i = 0; i < grid.length; i++) {
-    for (let j = 0; j < grid[i].length; j++) {
-      if (isRowEqualToColumn(grid, i ,j)) {
-        count++
-      }
-    }
-  }
-
-
-  return count;
+  return ans;
 }
