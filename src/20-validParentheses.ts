@@ -1,39 +1,28 @@
 /*
   Time Complexity: O(n)
-  Space Complexity: O(1)
+  Space Complexity: O(n)
 */
 
 export function isValid(s: string): boolean {
-  let matchString = "";
+  const stack: string[] = [];
+  const map: { [key: string]: string } = {
+    "(": ")",
+    "[": "]",
+    "{": "}",
+  };
 
   for (let i = 0; i < s.length; i++) {
-    let temp;
-    
-    if (s[i + 1] === "(" || s[i + 1] === "[" || s[i + 1] === "{") {
-      temp = s[i];
-    } else {
-      switch (s[i]) {
-        case "(":
-          matchString += "()";
-          break;
-        case "[":
-          matchString += "[]";
-          break;
-        case "{":
-          matchString += "{}";
-          break;
+    const char = s[i];
 
-        default:
-          matchString += "";
-          break;
+    if (map[char]) {
+      stack.push(char);
+    } else {
+      const last = stack.pop();
+
+      if (last === undefined || map[last] !== char) {
+        return false;
       }
     }
-    if (temp === "(") matchString += ")";
-    if (temp === "[") matchString += "]";
-    if (temp === "{") matchString += "}";
   }
-
-  console.log(s, matchString);
-
-  return matchString.trim() === s ? true : false;
+  return stack.length === 0;
 }
