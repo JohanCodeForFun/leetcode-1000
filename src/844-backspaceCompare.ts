@@ -1,30 +1,37 @@
 /*
   Time Complexity: O(n).
-  Space Complexity: O(n).
+  Space Complexity: O(1).
 
   Difficulty, Easy.
-  Tags: stack, string, array
+  Tags: two pointer, string, array
 */
 
 export function backspaceCompare(s: string, t: string): boolean {
-  const stackA = [];
-  const stackB = [];
+  let i = s.length - 1;
+  let j = t.length - 1;
 
-  for (let i = 0; i < s.length; i++) {
-    if (s[i] === "#") {
-      stackA.pop();
-    } else {
-      stackA.push(s[i])
+  while (i >= 0 || j >= 0) {
+    let backspaceCount;
+
+    backspaceCount = 0;
+    while (s[i] === "#" || backspaceCount > 0) {
+      if (s[i] === "#") backspaceCount++;
+      else backspaceCount--;
+      i--;
     }
-  }
 
-  for (let i = 0; i < t.length; i++) {
-    if (t[i] === "#") {
-      stackB.pop();
-    } else {
-      stackB.push(t[i])
+    backspaceCount = 0;
+    while (t[j] === "#" || backspaceCount > 0) {
+      if (t[j] === "#") backspaceCount++;
+      else backspaceCount--;
+      j--;
     }
-  }
 
-  return stackA.join("") === stackB.join("") ? true : false
-};
+    if (s[i] !== t[j]) return false;
+
+    i--;
+    j--;
+  }
+  
+  return true;
+}
