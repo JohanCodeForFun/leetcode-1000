@@ -11,37 +11,15 @@ The round-based procedure starts from the first senator to the last senator in t
 
 Suppose every senator is smart enough and will play the best strategy for his own party. Predict which party will finally announce the victory and change the Dota2 game. The output should be "Radiant" or "Dire".
 
- 
-
-Example 1:
-
-Input: senate = "RD"
-Output: "Radiant"
-Explanation: 
-The first senator comes from Radiant and he can just ban the next senator's right in round 1. 
-And the second senator can't exercise any rights anymore since his right has been banned. 
-And in round 2, the first senator can just announce the victory since he is the only guy in the senate who can vote.
-Example 2:
-
-Input: senate = "RDD"
-Output: "Dire"
-Explanation: 
-The first senator comes from Radiant and he can just ban the next senator's right in round 1. 
-And the second senator can't exercise any rights anymore since his right has been banned. 
-And the third senator comes from Dire and he can ban the first senator's right in round 1. 
-And in round 2, the third senator can just announce the victory since he is the only guy in the senate who can vote.
- 
-
 Constraints:
-
-n == senate.length
-1 <= n <= 104
-senate[i] is either 'R' or 'D'.
+  n == senate.length
+  1 <= n <= 104
+  senate[i] is either 'R' or 'D'.
 */
 
 import { predictPartyVictory } from "../src/649-predictPartyVictory";
 
-describe("2610: Find Matrix", () => {
+describe("649: Predict Party Victory", () => {
   it("first test", () => {
     const senate = "RD";
     const result =  "Radiant";
