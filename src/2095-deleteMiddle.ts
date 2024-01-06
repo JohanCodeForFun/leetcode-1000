@@ -3,6 +3,8 @@ import { ListNode } from "./class/NodeList";
 /*
   Time Complexity: O(n)
   Space Complexity: O(1)
+
+  Tags: Linked list, two pointers
 */
 
 export function deleteMiddle(head: ListNode | null): ListNode | null {
