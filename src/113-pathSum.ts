@@ -1,31 +1,34 @@
 import { TreeNode } from "./class/TreeNode";
+/*
+  Time Complexity: O(n)
+  Space Complexity: O(n)
+
+  Difficulty, medium
+  Tags: Binary tree, DFS
+*/
 
 function pathSum(root: TreeNode | null, targetSum: number): number[][] {
-  if (root === null) return [];
-  let result: number[] = [];
+  let result: number[][] = [];
+  const path: number[] = [];
 
-  function traverse(currentNode: TreeNode) {
-    result.push(currentNode.val)
-    if (currentNode.left) traverse(currentNode.left)
-    const sum = result.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+  function traverse(node: TreeNode | null, remainingSum: number): void {
+    if (root === null || node === null) return;
 
-    if(sum === targetSum) {
-      return result;
-    } else {
-      result.pop();
+    path.push(node.val);
+
+    if (
+      node.left === null &&
+      node.right === null &&
+      remainingSum === node.val
+    ) {
+      result.push(Array.from(path));
     }
-    if (currentNode.right) traverse(currentNode.right)
-    if(sum === targetSum) {
-      return result;
-    } else {
-      result = [];
-    }
+
+    traverse(node.left, remainingSum - node.val);
+    traverse(node.right, remainingSum - node.val);
+    path.pop();
   }
-  traverse(root)
 
+  traverse(root, targetSum);
   return result;
-  // (
-  // !!hasPathSum(root.left, targetSum - root.val) ||
-  // !!hasPathSum(root.right, targetSum - root.val)
-  // );
 }
