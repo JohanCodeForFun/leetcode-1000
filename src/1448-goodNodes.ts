@@ -1,22 +1,30 @@
 import { TreeNode } from "./class/TreeNode";
+/*
+  Time Complexity: O(n)
+  Space Complexity: O(h)
+
+  Difficulty: Medium.
+  Tags: Binary Tree, DFS
+*/
 
 function goodNodes(root: TreeNode | null): number {
   if (!root) return 0;
 
   let count = 0;
-  let prev = root.val;
 
-  const traverse = (node: TreeNode) => {
+  const traverse = (node: TreeNode | null, max: number) => {
     if (!node) return;
 
-    if (node.val >= prev) count++;
-    if (node.left) traverse(node.left);
-    prev = node.val;
+    if (node.val >= max) {
+      max = node.val;
+      count++;
+    }
 
-    if (node.right) traverse(node.right);
+    traverse(node.left, max);
+    traverse(node.right, max);
   };
 
-  traverse(root);
+  traverse(root, root.val);
 
   return count;
 }
