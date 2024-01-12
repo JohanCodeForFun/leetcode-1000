@@ -3,7 +3,7 @@
   Space Complexity: O(1)
 
   Difficulty, easy
-  Tags, Arrays, Strings, Set, Two Pointer
+  Tags: Arrays, Strings, Set, Two Pointer.
 */
 
 function halvesAreAlike(s: string): boolean {
