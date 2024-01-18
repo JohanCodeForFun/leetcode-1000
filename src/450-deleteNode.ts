@@ -6,43 +6,33 @@ import { TreeNode } from "./class/TreeNode";
 
   Difficulty: Easy.
   Tags: Binary Tree, DFS.
+
+  Thank you Github Copilot for this solution!
 */
 
 function deleteNode(root: TreeNode | null, key: number): TreeNode | null {
-  const stack: TreeNode[] = [];
+  if (!root) return null;
 
-  const dfs = (node: TreeNode | null, val: number) => {
-    if (!node) return null;
+  if (key < root.val) {
+    root.left = deleteNode(root.left, key);
+  } else if (key > root.val) {
+    root.right = deleteNode(root.right, key);
+  } else {
+    // root.val === key
+    if (!root.left) return root.right;
+    if (!root.right) return root.left;
 
-    if (node.val !== val) {
-      stack.push(node);
-
-      const left = dfs(node.left, val);
-      if (left) return left;
-      const right = dfs(node.right, val);
-      if (right) return right;
-    }
-  };
-
-  dfs(root, key);
-
-  return stack;
+    // root has two children
+    const minNode = findMin(root.right);
+    root.val = minNode.val;
+    root.right = deleteNode(root.right, minNode.val);
+  }
+  return root;
 }
 
-/*
-Input: root = [5,3,6,2,4,null,7], key = 3
-Output: [5,4,6,2,null,null,7]
-Explanation: Given key to delete is 3. So we find the node with value 3 and delete it.
-One valid answer is [5,4,6,2,null,null,7], shown in the above BST.
-Please notice that another valid answer is [5,2,6,null,4,null,7] and it's also accepted.
-
-Example 2:
-
-Input: root = [5,3,6,2,4,null,7], key = 0
-Output: [5,3,6,2,4,null,7]
-Explanation: The tree does not contain a node with value = 0.
-Example 3:
-
-Input: root = [], key = 0
-Output: []
-*/
+const findMin = (node: TreeNode): TreeNode => {
+  while (node.left) {
+    node = node.left;
+  }
+  return node;
+};
