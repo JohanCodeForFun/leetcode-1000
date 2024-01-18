@@ -1,24 +1,14 @@
 function climbStairs(n: number): number {
-  return n
-};
-/*
-case 1:
-  Input 2
-  Output 2
-  Expected 2
+  if (n === 1) return 1;
+  if (n === 2) return 2;
 
-case 2:
-  Input 3
-  Output 3
-  Expected 3
+  let dp: number[] = [];
+  dp[1] = 1;
+  dp[2] = 2;
 
-case 3:
-  Input 4
-  Output 5
-  Expected 5
+  for (let i = 3; i <= n; i++) {
+    dp[i] = dp[i - 1] + dp[i - 2];
+  }
 
-case 5:
-  Input 4
-  Output 4
-  Expected 5
-*/
+  return dp[n];
+}
