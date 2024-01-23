@@ -6,68 +6,46 @@
 
   Difficulty, Medium
   Tags, Graph, DFS
-
-  Thank you AlgoJs for this solution!
-  Link, https://www.youtube.com/watch?v=LMxTM4QaCgM
 */
 
 function findCircleNum(isConnected: number[][]): number {
-  let adjList: { [key: number]: number[] } = {};
+  const adjList: Map<number, Set<number>> = new Map();
 
-  for (let i = 0; i < isConnected.length; i++) {
-    for (let j = 0; j < isConnected[i].length; j++) {
-      let val = isConnected[i][j];
-
+  isConnected.forEach((row, i) => {
+    row.forEach((val, j) => {
       if (val === 1) {
-        if (!adjList[i]) {
-          adjList[i] = [j];
-        } else {
-          adjList[i].push(j);
+        if (!adjList.has(i)) {
+          adjList.set(i, new Set([j]));
         }
+        adjList.get(i)?.add(j);
       }
-    }
-  }
+    });
+  });
 
-  let visited = new Set();
+  const visited: Set<number> = new Set();
   let provinces = 0;
 
-  for (let key in adjList) {
-    let keyNum = parseInt(key);
-    provinces += dfs(keyNum);
-  }
-
-  function dfs(node: number) {
-    if (visited.has(node)) {
-      return 0;
-    }
-
-    visited.add(node);
-
-    let neighbors = adjList[node];
-
-    for (let neighbor of neighbors) {
-      dfs(neighbor);
-    }
-
-    return 1;
-  }
+  adjList.forEach((_, key) => {
+    provinces += dfs(key, adjList, visited);
+  });
 
   return provinces;
 }
 
-// let directProvince = 0;
-// let indirectProvince = 0;
-// let outerCount = 0;
-// let innerCount = 0;
+function dfs(
+  node: number,
+  adjList: Map<number, Set<number>>,
+  visited: Set<number>
+) {
+  if (visited.has(node)) {
+    return 0;
+  }
 
-// for (let i = 0; i < isConnected.length; i++) {
-//   for (let j = 0; j < isConnected[i].length; j++) {
-//     if (isConnected[i][j] === 1 && isConnected[i][j + 1] === 1) {
-//       directProvince++;
-//     }
-//     if (isConnected[i][j] === 1 && isConnected[i][j + 1] === 0) {
-//       indirectProvince++;
-//     }
-//   }
-// }
-// return indirectProvince;
+  visited.add(node);
+
+  adjList.get(node)?.forEach((neighbor) => {
+    dfs(neighbor, adjList, visited);
+  });
+
+  return 1;
+}
