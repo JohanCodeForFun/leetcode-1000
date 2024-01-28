@@ -4,21 +4,23 @@
 
   Difficulty: Easy
   Tags: String
+
+  Thank you Illia for the idea of using chars instead of my previous solution!
+  It made me think of using a dictionary to store the values of each char.
+  Link, https://leetcode.com/problems/split-a-string-in-balanced-strings/discuss/4090574/Beginner-friendly-oror-Simple-solution-in-Python3TypeScript
 */
 
 function balancedStringSplit(s: string): number {
-  let balanceCount = 0;
+  const chars: { [key: string]: number } = { L: -1, R: 1 };
+  let cur = 0;
   let ans = 0;
 
   for (let i = 0; i < s.length; i++) {
-    if (s[i] === "L") {
-      balanceCount++;
-    } else {
-      balanceCount--;
-    }
-    if (balanceCount === 0) {
+    cur += chars[s[i]];
+    if (cur === 0) {
       ans++;
     }
   }
+
   return ans;
 }
