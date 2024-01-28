@@ -17,4 +17,16 @@ function isPerfectSquare(num: number): boolean {
   }
 
   return false;
+
+  /* 
+  cute solution from copilot:
+  // ...
+  
+  let i = 1;
+  while (i * i < num) {
+    i++;
+  }
+
+  return i * i === num;
+  */
 }
