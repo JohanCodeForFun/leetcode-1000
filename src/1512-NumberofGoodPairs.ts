@@ -1,5 +1,5 @@
 /*
-  Time Complexity: O(n^2)
+  Time Complexity: O(n)
   Space Complexity: O(1)
 
   Difficulty: Easy
@@ -7,15 +7,17 @@
 */
 
 function numIdenticalPairs(nums: number[]): number {
-  let count = 0;
+  let goodPairCount = 0;
+  let map: { [key: string]: number } = {};
 
-  for (let i = 0; i < nums.length; i++) {
-    for (let j = 0; j < nums.length; j++) {
-      if (nums[i] === nums[j] && i < j) {
-        count++
-      }
+  for (let num of nums) {
+    if (map[num]) {
+      goodPairCount += map[num];
+      map[num]++
+    } else {
+      map[num] = 1
     }
   }
 
-  return count
+  return goodPairCount;
 };
