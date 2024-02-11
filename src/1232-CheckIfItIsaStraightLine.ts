@@ -7,6 +7,9 @@
 */
 
 function checkStraightLine(coordinates: number[][]): boolean {
+  // const dx = x2 - x1, dy = y2 - y1;
+  // return coordinates.every(([x, y]) => (dx * (y - y1)) === (dy * (x - x1)));
+
   let x1 = coordinates[0][0];
   let x2 = coordinates[1][0];
   let y1 = coordinates[0][1];
