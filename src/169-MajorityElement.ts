@@ -1,25 +1,25 @@
 /*
   Time Complexity: O(n)
-  Space Complexity: O(n)
+  Space Complexity: O(1)
 
   Difficulty: Easy
-  Tags: Hash map
+  Tags: Boyer–Moore majority vote algorithm, hash map
+
+  Thank you gilish for this solution!
+  Link, https://leetcode.com/problems/majority-element/discuss/2686685/Typescript-solution-O(n)-time-O(1)-space-%2B-Explanation
 */
 
 function majorityElement(nums: number[]): number {
-  const hash = new Map();
+  let candidate = nums[0];
+  let count = 0;
 
   for (const num of nums) {
-    hash.set(num, (hash.get(num) || 0) + 1);
-  }
-
-  let majorityElement = nums[0];
-
-  for (const [num, count] of hash.entries()) {
-    if (count > hash.get(majorityElement)) {
-      majorityElement = num
+    if (count === 0) {
+      candidate = num;
     }
+
+    count += (num === candidate) ? 1 : -1;
   }
 
-  return majorityElement;
+  return candidate;
 };
