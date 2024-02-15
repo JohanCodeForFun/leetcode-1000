@@ -7,17 +7,12 @@
 */
 
 function capitalizeTitle(title: string): string {
-  const stringArray = title.split(' ');
-  const result: string[] = [];
+  title = title.toLowerCase();
 
-  stringArray.forEach(word => {
-    if (word.length >= 2) {
-      let capitalizeWord = word[0].toUpperCase() + word.slice(1).toLowerCase();
-      result.push(capitalizeWord)
-    } else {
-      result.push(word.toUpperCase());
-    }
+  const words = title.split(' ').map(word => {
+    if (word.length < 2) return word;
+    return word[0].toUpperCase() + word.slice(1).toLowerCase();
   })
 
-  return result.join(' ');
+  return words.join(' ');
 };
