@@ -1,22 +1,25 @@
 /*
-  Time Complexity: O(n)
-  Space Complexity: O(n)
+  Time Complexity: O(nmlog(m))
+  Space Complexity: O(n*m)
 
   Difficulty: Easy
   Tags: Array, set
+
+  Thank you Elango Ramar for this solution!
+  Link, https://leetcode.com/problems/count-pairs-of-similar-strings/discuss/4414640/Simple-3-liner-solution-that-beats-78-of-runtime
 */
 
 function similarPairs(words: string[]): number {
-  let pairCount = 0;
+  const frequency = new Map<string, number>();
+  const sortedWords = words.map((word) => {
+    return [... new Set(word)].sort().join()
+  })
 
-  for (let i = 0; i < words.length; i++) {
-    const curr = new Set(words[i]);
-    const next = new Set(words[i + 1]);
+  return sortedWords.reduce((count, word) => {
+    const f = frequency.get(word) || 0;
+    count += f;
+    frequency.set(word, f + 1)
 
-    if (curr.size === next.size) {
-      pairCount++;
-    }
-  }
-
-  return pairCount;
+    return count;
+  }, 0)
 };
