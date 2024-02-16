@@ -14,19 +14,10 @@ function findLeastNumOfUniqueInts(arr: number[], k: number): number {
 
   numMap = new Map([...numMap.entries()].sort((a, b) => a[1] - b[1]));
 
-  let iterator = numMap.entries();
-
-  for (let i = 0; i <= numMap.size; i++) {
-    let entry = iterator.next();
-    let key = entry.value[0];
-    let value = entry.value[1];
-
-    console.log(key, value)
-    console.log("loop", i, numMap.size)
-
+  for (let [key, value] of numMap) {
     if (value <= k) {
-      k -= value
-      numMap.delete(key);
+      k -= value;
+      numMap.delete(key)
     } else {
       break;
     }
