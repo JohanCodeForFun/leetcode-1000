@@ -1,49 +1,28 @@
+/*
+  Time Complexity: O(n)
+  Space Complexity: O(n)
+
+  Difficulty: Medium
+  Tags: Array, priority queue, daily
+
+  Thank you Sumit Pokhriyal for this solution!
+  Link, https://leetcode.com/problems/furthest-building-you-can-reach/discuss/4741112/8-lines-of-optimized-code-or-Step-by-step-explanation
+*/
+
+import { PriorityQueue } from "./class/PriorityQueue";
+
 function furthestBuilding(heights: number[], bricks: number, ladders: number): number {
-  // loop through heights, while bricks || ladders
-  // if current heights > next, continue
-  // if current heights < next, 
-  //    use bricks or ladder
-  //    when is it good to choose either?
-  // keep track of traversed heights
-  // return heights
+  const n = heights.length;
+  const pq = new MinPriorityQueue();
 
-  let traversedHeights = 0;
+  for (let i = 0; i < n - 1; i++) {
+    let diff = heights[i + 1] - heights[i];
 
-  for (let i = 0; i < heights.length - 1; i++) {
-    let diff = heights[traversedHeights + 1] - heights[traversedHeights];
-    console.log("loop count:", i)
+    if (diff > 0) pq.enqueue(diff);
+    if (pq.size() > ladders) bricks -= pq.dequeue().element;
 
-
-    if (heights[traversedHeights] < heights[traversedHeights + 1]) {
-      // if (h[i+1] - h[i] > 0) bricks is positive, use bricks
-      // otherwise, use ladder
-
-
-      if (diff > 0 && ladders > 0) {
-        traversedHeights++;
-        ladders--;
-        console.log("climb with ladder", ladders, "diff:", diff)
-      } else if (diff > 0 && bricks > diff) {
-        console.log("bricks:", bricks, heights[traversedHeights + 1], heights[traversedHeights])
-        bricks -= heights[traversedHeights + 1] - heights[traversedHeights]
-        traversedHeights++;
-        console.log("climb with bricks", bricks, "diff:", diff)
-      }
-
-      if (!bricks && !ladders) {
-        break;
-      }
-
-    } else {
-      if (heights[traversedHeights] > heights[traversedHeights + 1]) {
-        traversedHeights++
-        console.log("jump down", traversedHeights)
-      }
-
-    }
-
+    if (bricks < 0) return i;
   }
 
-
-  return traversedHeights
+  return n - 1;
 };
