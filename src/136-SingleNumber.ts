@@ -7,18 +7,18 @@
 */
 
 function singleNumber(nums: number[]): number {
-  let numMap = new Map<number, number>();
-  let uniqueNum = Infinity;
+  let map = new Map<number, number>();
 
   for (let num of nums) {
-    numMap.set(num, (numMap.get(num) || 0) + 1);
-  }
-
-  for (let [value, key] of numMap) {
-    if (key === 1) {
-      uniqueNum = value;
+    if (map.get(num) !== undefined) {
+      map.delete(num)
+    } else {
+      map.set(num, 1)
     }
   }
 
-  return uniqueNum;
+  let keys = map.keys();
+  let singleKey = keys.next().value;
+
+  return singleKey;
 };
