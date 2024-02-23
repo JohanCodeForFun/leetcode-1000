@@ -7,28 +7,19 @@
 */
 
 function intersect(nums1: number[], nums2: number[]): number[] {
-  const map1 = new Map<number, number>();
-  const map2 = new Map<number, number>();
+  const map = new Map<number, number>();
   const result: number[] = [];
 
   for (let num of nums1) {
-    map1.set(num, (map1.get(num) || 0) + 1);
+    map.set(num, (map.get(num) || 0) + 1);
   }
 
   for (let num of nums2) {
-    map2.set(num, (map2.get(num) || 0) + 1);
-  }
+    let count = map.get(num)
 
-  console.log(map1, map2)
-
-  for (let [key, value1] of map1) {
-    if (map2.has(key)) {
-      let value2 = map2.get(key)
-      let minCount = Math.min(value1, value2)
-
-      for (let i = 0; i < minCount; i++) {
-        result.push(key)
-      }
+    if (count && count > 0) {
+      result.push(num);
+      map.set(num, count - 1)
     }
   }
 
