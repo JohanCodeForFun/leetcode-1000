@@ -7,22 +7,19 @@
 */
 
 function maximumOddBinaryNumber(s: string): string {
-  let result = [];
-  let first = true;
-  let temp = "";
+  let bits = Array.from(s);
+  let left = 0;
+  let right = bits.length - 1;
 
-  for (const num of s) {
-    if (num === "1" && first) {
-      temp = num;
-      first = false;
-    } else if (num === "0") {
-      result.push(num)
-    } else {
-      result.unshift(num)
+  while (left <= right) {
+    if (bits[left] === '0' && bits[right] === '1') {
+      [bits[left], bits[right]] = [bits[right], bits[left]];
     }
+    left += (bits[left] === '1' ? 1 : 0);
+    right -= (bits[right] === '0' ? 1 : 0);
   }
 
-  result.push(temp)
+  [bits[right], bits[bits.length - 1]] = [bits[bits.length - 1], bits[right]];
 
-  return result.join("");
+  return bits.join('');
 };
