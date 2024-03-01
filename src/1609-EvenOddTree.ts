@@ -1,4 +1,4 @@
-import { TreeNode } from "./src/class/TreeNode";
+import { TreeNode } from "./class/TreeNode";
 
 /*
   Time Complexity: O(n)
