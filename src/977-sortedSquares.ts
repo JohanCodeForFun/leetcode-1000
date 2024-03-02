@@ -14,4 +14,7 @@ function sortedSquares(nums: number[]): number[] {
   }
 
   return result.sort((a, b) => a - b);
+
+  // one liner
+  // return nums.map(num => num * num).sort((a, b) => a - b);
 };
