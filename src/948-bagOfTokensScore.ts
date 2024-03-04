@@ -1,5 +1,5 @@
 /*
-  Time Complexity: O(n)
+  Time Complexity: O(n log n)
   Space Complexity: O(1)
 
   Difficulty: Medium
@@ -24,7 +24,7 @@ function bagOfTokensScore(tokens: number[], power: number): number {
       power += tokens[high];
       high--;
     } else {
-      return score
+      break;
     }
   }
 
