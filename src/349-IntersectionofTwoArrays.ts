@@ -1,5 +1,5 @@
 /*
-  Time Complexity: O(n log n + m)
+  Time Complexity: O(n + m)
   Space Complexity: O(n + m)
 
   Difficulty: Easy
@@ -7,6 +7,11 @@
 */
 
 function intersection(nums1: number[], nums2: number[]): number[] {
+  let set1 = new Set(nums1);
+  let set2 = new Set(nums2);
+
+  return [...set1].filter(num => set2.has(num));
+
   nums1 = nums1.sort((a, b) => a - b);
   nums2 = nums2.sort((a, b) => a - b);
 
@@ -29,5 +34,5 @@ function intersection(nums1: number[], nums2: number[]): number[] {
     }
   }
 
-  return [ ...set ] as number[]
+  return [...set] as number[]
 };
