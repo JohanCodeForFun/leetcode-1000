@@ -1,5 +1,5 @@
 /*
-  Time Complexity: O(n^3)
+  Time Complexity: O(n)
   Space Complexity: O(1)
 
   Difficulty: Easy
@@ -7,21 +7,21 @@
 */
 
 function pivotInteger(n: number): number {
+
+  let totalSum = 0;
   for (let i = 1; i <= n; i++) {
-    let sumLeft = 0;
-    let sumRight = 0;
+    totalSum += i;
+  }
+  
+  let leftSum = 0;
+  for (let i = 0; i <= n; i++) {
+    let rightSum = totalSum - leftSum - i;
 
-    for (let j = 0; j <= i; j++) {
-      sumLeft += j;
+    if (leftSum === rightSum) {
+      return i;
     }
 
-    for (let k = i; k <= n; k++) {
-      sumRight += k;
-    }
-
-    if (sumLeft === sumRight) {
-      return i
-    }
+    leftSum += i;
   }
 
   return -1;
