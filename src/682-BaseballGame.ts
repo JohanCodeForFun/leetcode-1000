@@ -7,24 +7,22 @@
 */
 
 function calPoints(operations: string[]): number {
-    let scoreCount = [];
+    let scoreCount: number[] = [];
 
     for (let i = 0; i < operations.length; i++) {
 
-        if (parseInt(operations[i])) {
-            scoreCount.push(Number(operations[i]))
-        }
-
-        if (operations[i] === "C") {
-            scoreCount.pop()
-        }
-
-        if (operations[i] === "D") {
-            scoreCount.push(Number(scoreCount[scoreCount.length - 1] * 2))
-        }
-
-        if (operations[i] === "+") {
-            scoreCount.push(Number(scoreCount[scoreCount.length - 1] + scoreCount[scoreCount.length - 2]))
+        switch (operations[i]) {
+            case "C":
+                scoreCount.pop();
+                break;
+            case "D":
+                scoreCount.push(Number(scoreCount[scoreCount.length - 1] * 2));
+                break;
+            case "+":
+                scoreCount.push(Number(scoreCount[scoreCount.length - 1] + scoreCount[scoreCount.length - 2]));
+                break;
+            default:
+                scoreCount.push(Number(operations[i]));
         }
     }
 
