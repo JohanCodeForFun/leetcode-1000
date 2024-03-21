@@ -1,21 +1,22 @@
 import { ListNode } from "./class/NodeList";
 
-// Thank you madiweaver for this solution
-// link, https://leetcode.com/madiweaver/
+// Thank you neetcode for this solution
+// link, https://www.youtube.com/watch?v=G0_I-ZF0S38
 
 // time complexity of the reverseList function is O(n).
-// The space complexity of the function is O(n).
+// The space complexity of the function is O(1).
 
-export function reverseList(head: ListNode | null): ListNode | null {
-  if (!head) return head;
+function reverseList(head: ListNode | null): ListNode | null {
+  let curr = head;
+  let prev = null;
 
-  function reverse(curr: ListNode, parent: ListNode | null): ListNode {
-    const next = curr.next;
+  while (curr !== null) {
+    let nxt = curr.next;
+    curr.next = prev;
 
-    curr = new ListNode(curr.val, parent);
-
-    if (!next) return curr;
-    return reverse(next, curr);
+    prev = curr;
+    curr = nxt;
   }
-  return reverse(head, null)
+
+  return prev;
 }
