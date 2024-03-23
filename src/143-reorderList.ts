@@ -1,45 +1,50 @@
 import {ListNode} from "./class/NodeList";
 
-function reorderList(head: ListNode | null): void {
-    // get a list of head reversed
-    // add normal list on odd
-    // add reversed list on even
-    // modify the head list (?)
+/*
+    Time Complexity: O(n)
+    Space Complexity: O(1)
 
-    // reverse list
-    let curr = head;
+    Difficulty: Medium
+    Tags: LinkedList
+*/
+
+function reorderList(head: ListNode | null): void {
+    if (head === null) return;
+
+    let slow = head;
+    let fast = head;
+
+    while (fast !== null && fast.next !== null) {
+        fast = fast.next.next;
+        slow = slow.next;
+    }
+
+    let secondHalf = slow.next;
+
+    slow.next = null;
+
+    // reverse the second half
     let prev = null;
 
-    while (curr !== null) {
-        let nxt = curr.next;
-        curr.next = prev;
-
-        prev = curr;
-        curr = nxt;
+    while (secondHalf !== null) {
+        let next = secondHalf.next;
+        secondHalf.next = prev;
+        prev = secondHalf;
+        secondHalf = next;
     }
 
-    console.log(prev)
+    let left = head;
+    let right = prev;
 
-    let index = 1;
-    let newNode = head;
+    // alternate the nodes
+    while (right !== null && left !== null) {
+        let leftNext = left.next;
+        let rightNext = right.next;
 
-    while (newNode !== null) {
+        left.next = right;
+        right.next = leftNext;
 
-        if (index % 2 !== 0) {
-            newNode = newNode.next;
-            index++;
-            console.log("odd", newNode)
-
-        } else {
-            newNode = prev.next;
-            prev = prev.next
-            index++;
-            console.log("even", newNode, prev)
-        }
+        left = leftNext;
+        right = rightNext;
     }
-
-    console.log(head, newNode);
-
-    head = newNode;
-
-};
+}
