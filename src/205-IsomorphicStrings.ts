@@ -1,31 +1,30 @@
+/*
+    Time Complexity: O(n)
+    Space Complexity: O(n)
+
+    Difficulty: Easy
+    Tags: String
+
+    Thank you, NeetCode, for this solution!
+    Link, https://www.youtube.com/watch?v=7yF-U1hLEqQ
+*/
+
 function isIsomorphic(s: string, t: string): boolean {
-    let map1 = new Map<string, number>();
-    let map2 = new Map<string, number>();
+    let mapST: { [key: string]: string } = {};
+    let mapTS: { [key: string]: string } = {};
 
-    for (let char of s) {
-        map1.set(char, (map1.get(char) || 0) + 1);
+    for (let i = 0; i < s.length; i++) {
+        let c1 = s[i];
+        let c2 = t[i];
+
+        if ((mapST.hasOwnProperty(c1) && mapST[c1] !== c2) ||
+            (mapTS.hasOwnProperty(c2) && mapTS[c2] !== c1)) {
+            return false
+        }
+
+        mapST[c1] = c2;
+        mapTS[c2] = c1;
     }
 
-    for (let char of t) {
-        map2.set(char, (map2.get(char) || 0) + 1);
-    }
-    console.log(map1, map2)
-
-    let result1 = []
-    let result2 = []
-
-    for (let [, v] of map1) {
-        console.log("map1", v)
-        result1.push(v)
-    }
-    for (let [, v] of map1) {
-        console.log("map2", v)
-        result2.push(v)
-    }
-
-    console.log(result1.toString(), result2.toString())
-
-    const ans = result1.toString() === result2.toString();
-
-    return ans
-};
+    return true
+}
