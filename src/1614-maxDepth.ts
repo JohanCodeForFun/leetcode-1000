@@ -8,18 +8,18 @@
 
 function maxDepth(s: string): number {
     let depth = 0;
-    let temp = 0;
+    let openBrackets = 0;
 
     for (let char of s) {
         if (char === "(") {
-            depth++
+            openBrackets++
+
+        } else if (char === ")") {
+            openBrackets--;
         }
 
-        if (char === ")") {
-            temp = Math.max(temp, depth);
-            depth--;
-        }
+        depth = Math.max(depth, openBrackets);
     }
 
-    return temp;
+    return depth;
 }
