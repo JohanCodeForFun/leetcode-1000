@@ -4,6 +4,9 @@
 
     Difficulty: Easy
     Tags: Array.
+
+    Thank you, javad for this solution!
+    Link, https://leetcode.com/problems/number-of-students-unable-to-eat-lunch/discuss/4990909/easy-to-understand-JS
  */
 
 function countStudents(students: number[], sandwiches: number[]): number {
