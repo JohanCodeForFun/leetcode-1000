@@ -10,5 +10,12 @@ type JSONValue = null | boolean | number | string | JSONValue[] | { [key: string
 type Obj = Record<string, JSONValue> | JSONValue[]
 
 function isEmpty(obj: Obj): boolean {
-    return Object.keys(obj).length <= 0
+  for (let key in obj) {
+
+    if (obj.hasOwnProperty(key)) {
+      return false
+    }
+  }
+
+  return true;
 };
