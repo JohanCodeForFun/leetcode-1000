@@ -1,6 +1,6 @@
 /*
-  Time Complexity: O(1)
-  Space Complexity: O(1)
+  Time Complexity: O(n)
+  Space Complexity: O(n)
 
   Difficulty: Easy
   Tags: Object
