@@ -7,6 +7,16 @@ GROUP BY m.user_id
 ORDER BY counted DESC, u.name ASC
 LIMIT 1;
 
+# Write your MySQL query statement below
+SELECT m.title, ROUND(AVG(r.rating),1) AS avgRating
+FROM MovieRating r
+JOIN Movies m
+ON r.movie_id = m.movie_id
+WHERE YEAR(r.created_at) = 2020 AND MONTH(r.created_at) = 2
+GROUP BY m.title
+ORDER BY avgRating DESC, m.title ASC
+LIMIT 1;
+
 Input: 
 Movies table:
 +-------------+--------------+
