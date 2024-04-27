@@ -1,25 +1,23 @@
 # Write your MySQL query statement below
-WITH UserCounts AS (
-    SELECT COUNT(m.user_id) AS counted, u.name
+WITH UserAndMovieInfo AS (
+    (SELECT 'user' AS type, u.name AS result
     FROM MovieRating m
     JOIN Users u ON m.user_id = u.user_id
     GROUP BY m.user_id
-    ORDER BY counted DESC, u.name ASC
-    LIMIT 1
-),
-TopRatedMovies AS (
-    SELECT m.title, ROUND(AVG(r.rating), 1) AS avgRating
+    ORDER BY COUNT(m.user_id) DESC, u.name ASC
+    LIMIT 1)
+
+    UNION ALL
+
+    (SELECT 'movie' AS type, m.title AS result
     FROM MovieRating r
     JOIN Movies m ON r.movie_id = m.movie_id
     WHERE YEAR(r.created_at) = 2020 AND MONTH(r.created_at) = 2
     GROUP BY m.title
-    ORDER BY avgRating DESC, m.title ASC
-    LIMIT 1
+    ORDER BY AVG(r.rating) DESC, m.title ASC
+    LIMIT 1)
 )
-SELECT uc.name AS results FROM UserCounts uc
-UNION ALL
-SELECT tm.title AS results FROM TopRatedMovies tm;
-
+SELECT result AS results FROM UserAndMovieInfo;
 
 Input: 
 Movies table:
