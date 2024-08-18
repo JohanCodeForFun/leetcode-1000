@@ -1,24 +1,15 @@
 function numberOfPairs(nums: number[]): number[] {
-  const frequency: { [key: number]: number } = {};
+  let count = 0;
+  let sorted = nums.sort((a, b) => a - b);
 
-  for (let num of nums) {
-    frequency[num] = (frequency[num] || 0) + 1;
+  for (let i = 0; i < sorted.length; i++) {
+    if (sorted[i] === sorted[i + 1]) {
+      sorted.shift()
+      sorted.shift()
+      count++;
+      i--;
+    }
   }
 
-  let pairs = 0;
-  let leftovers = 0;
-
-  for (let key in frequency) {
-    const num = parseInt(key);
-
-    pairs += Math.floor(frequency[num] / 2)
-    frequency[num] %= 2;
-  }
-
-  let sumOddNumbers = 0;
-  for (let key in frequency) {
-    leftovers += frequency[key]
-  }
-
-  return [pairs, leftovers];
+  return [count, sorted.length];
 };
